@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Home · Mood Tracker{% endblock %}
+
+{% block content %}
+    <h1>Mood & Mental Health Tracker</h1>
+    <p class="page-title-sub">
+        A simple place to check in with yourself and track how you’re really feeling.
+    </p>
+
+    <div style="margin-top: 18px;">
+        <a href="{% url 'add_mood' %}" class="btn btn-primary">Add a new mood entry</a>
+        <a href="{% url 'view_history' %}" class="btn btn-secondary">View mood history</a>
+        <a href="{% url 'mood_calendar' %}" class="btn btn-secondary">Mood calendar</a>
+        <a href="{% url 'mood_trends' %}" class="btn btn-secondary">Mood trends</a>
+    </div>
+{% endblock %}

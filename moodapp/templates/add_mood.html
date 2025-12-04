@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Add Mood · Mood Tracker{% endblock %}
+
+{% block content %}
+    <h1>Add New Mood Entry</h1>
+    <p class="page-title-sub">
+        Log how you’re feeling today. You can always come back and edit this later.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save entry</button>
+        <a href="{% url 'view_history' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+
+    <div class="nav-links">
+        <a href="{% url 'home' %}">← Back to home</a>
+    </div>
+{% endblock %}

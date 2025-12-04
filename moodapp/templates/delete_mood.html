@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Mood · Mood Tracker{% endblock %}
+
+{% block content %}
+    <h1>Delete Mood Entry</h1>
+    <p class="page-title-sub">
+        This can’t be undone. If you’re sure you don’t want to keep this entry, confirm below.
+    </p>
+
+    <p>
+        <strong>{{ entry.date }}</strong>
+        <span class="tag">{{ entry.get_mood_display }}</span><br>
+        {{ entry.notes|default:"(no notes)" }}
+    </p>
+
+    <form method="post" style="margin-top: 16px;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, delete it</button>
+        <a href="{% url 'view_history' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+
+    <div class="nav-links">
+        <a href="{% url 'home' %}">← Back to home</a>
+    </div>
+{% endblock %}

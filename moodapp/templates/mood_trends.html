@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Mood Trends · Mood Tracker{% endblock %}
+
+{% block content %}
+    <h1>Mood Trends</h1>
+    <p class="page-title-sub">
+        A simple overview of how often each mood shows up in your entries.
+    </p>
+
+    {% if mood_counts %}
+        <table>
+            <tr>
+                <th>Mood</th>
+                <th>Number of entries</th>
+            </tr>
+            {% for row in mood_counts %}
+                <tr>
+                    <td>{{ row.mood|title }}</td>
+                    <td>{{ row.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No entries yet, so there are no trends to show.</p>
+    {% endif %}
+
+    <div class="nav-links">
+        <a href="{% url 'view_history' %}">← Back to history</a>
+        <a href="{% url 'home' %}">Back to home</a>
+    </div>
+{% endblock %}

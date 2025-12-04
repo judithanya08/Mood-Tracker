@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Mood Calendar · Mood Tracker{% endblock %}
+
+{% block content %}
+    <h1>Mood Calendar</h1>
+    <p class="page-title-sub">
+        See which days you’ve logged a mood this month.
+    </p>
+
+    <h3 style="margin-top: 10px;">{{ month_name }} {{ year }}</h3>
+
+    <table>
+        <tr>
+            <th>Sun</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+        </tr>
+
+        {% for week in weeks %}
+            <tr>
+                {% for day in week %}
+                    {% if day.month == month %}
+                        <td>
+                            <strong>{{ day.day }}</strong><br>
+                            {% if day in dates_with_entries %}
+                                <!-- This is the dot -->
+                                <span style="
+                                    display:inline-block;
+                                    width:8px;
+                                    height:8px;
+                                    border-radius:50%;
+                                    background:#6b5bff;
+                                    margin-top:4px;
+                                "></span>
+                            {% endif %}
+                        </td>
+                    {% else %}
+                        <!-- Days from previous/next month (fade them out) -->
+                        <td style="color:#ccc;">
+                            {{ day.day }}
+                        </td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
+    <div class="nav-links" style="margin-top: 16px;">
+        <a href="{% url 'home' %}">← Back to home</a>
+        <a href="{% url 'view_history' %}" style="margin-left: 10px;">View history</a>
+    </div>
+{% endblock %}

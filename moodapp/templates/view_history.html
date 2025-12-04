@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Mood History · Mood Tracker{% endblock %}
+
+{% block content %}
+    <h1>Mood History</h1>
+    <p class="page-title-sub">
+        A timeline of how you’ve been feeling. Use this to notice patterns and progress.
+    </p>
+
+    {% if entries %}
+        <ul>
+            {% for entry in entries %}
+                <li>
+                    <strong>{{ entry.date }}</strong>
+                    <span class="tag">{{ entry.get_mood_display }}</span><br>
+                    {{ entry.notes|default:"(no notes)" }}<br>
+                    <a href="{% url 'edit_mood' entry.id %}">Edit</a> ·
+                    <a href="{% url 'delete_mood' entry.id %}">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No mood entries yet. Start by adding one!</p>
+    {% endif %}
+
+    <div style="margin-top: 14px;">
+        <a href="{% url 'add_mood' %}" class="btn btn-primary">Add new entry</a>
+        <a href="{% url 'mood_trends' %}" class="btn btn-secondary">View trends</a>
+    </div>
+
+    <div class="nav-links">
+        <a href="{% url 'home' %}">← Back to home</a>
+    </div>
+{% endblock %}
